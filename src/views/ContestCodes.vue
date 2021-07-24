@@ -27,11 +27,11 @@ export default {
     };
   },
   created: function() {
-    this.getContest();
+    this.getCodes();
   },
   methods: {
-    getContest() {
-      const uri = "http://35.75.64.1:8080/contests/"+this.$route.params.id+"/codes";
+    getCodes() {
+      const uri = "http://35.75.64.1:8000/contests/"+this.$route.params.id+"/codes";
       axios.get(uri, {
         headers: { 
           "Content-Type": "application/json", 

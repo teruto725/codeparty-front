@@ -9,9 +9,9 @@
                 v-for="code in codes" :key="code.id"
                 color="thirdary"
             >
-                <v-list-item-content>
-                    <v-list-item-title>{{code.id}}</v-list-item-title>
-                </v-list-item-content>
+							<v-list-item-content>
+									<v-list-item-title>{{code.id}}</v-list-item-title>
+							</v-list-item-content>
             </v-list-item>
         </v-card-text>
         <v-card-actions>
@@ -47,7 +47,7 @@ export default {
 		},
     postCode() {
 			console.log(this.$store.state.userToken )
-      const uri = "http://35.75.64.1:8080/codes";
+      const uri = "http://35.75.64.1:8000/codes";
 			let config = {
         headers: {
             "Content-Type": "multipart/form-data", 
@@ -67,7 +67,7 @@ export default {
     },
     getUserCodes() {
 			console.log(this.$store.state.userToken )
-      const uri = "http://35.75.64.1:8080/contests/"+this.$route.params.id+"/submitted";
+      const uri = "http://35.75.64.1:8000/contests/"+this.$route.params.id+"/submitted";
       axios.get(uri, {
         headers: { 
           "Content-Type": "application/json", 
@@ -80,6 +80,7 @@ export default {
         this.codes = response.data;
       });
     },
+
   }
 };
 </script>

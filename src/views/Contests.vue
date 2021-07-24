@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     getContests() {
-      const uri = "http://35.75.64.1:8080/contests";
+      const uri = "http://35.75.64.1:8000/contests";
       axios.get(uri, {
         headers: { 
           "Content-Type": "application/json", 

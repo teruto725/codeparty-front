@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     doLogin() {
-      const uri = "http://35.75.64.1:8080/users";
+      const uri = "http://35.75.64.1:8000/users";
       console.log(this.user.name)
       axios.post(
         uri, 

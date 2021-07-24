@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     getContest() {
-      const uri = "http://35.75.64.1:8080/contests/" + this.$route.params.id;
+      const uri = "http://35.75.64.1:8000/contests/" + this.$route.params.id;
       axios
         .get(uri, {
           headers: {

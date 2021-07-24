@@ -2,6 +2,7 @@
   <v-container>
     <v-card>
       <v-card-title> バトルルーム </v-card-title>
+			<v-card-actions>
       <v-dialog v-model="dialog" width="500">
         <template v-slot:activator="{ on, attrs }">
           
@@ -10,24 +11,54 @@
 
         <v-card>
           <v-card-title class="text-h5 grey lighten-2">
-            Privacy Policy
+            バトルルームの作成
           </v-card-title>
 
           <v-card-text>
-            
+            <v-form v-on:submit.prevent="postRoom">
+							<v-combobox
+								v-model="code1"
+								:items="codes"
+								label="Combobox1"
+								multiple
+								outlined
+								dense
+							>
+							</v-combobox>
+							<v-combobox
+								v-model="code2"
+								:items="codes"
+								label="Combobox2"
+								multiple
+								outlined
+								dense
+							>
+							</v-combobox>
+							<v-combobox
+								v-model="code3"
+								:items="codes"
+								label="Combobox3"
+								multiple
+								outlined
+								dense
+							>
+							</v-combobox>
+							<v-combobox
+								v-model="code4"
+								:items="codes"
+								label="Combobox4"
+								multiple
+								outlined
+								dense
+							>
+							</v-combobox>
+							<v-btn type="submit" color="primary" outlined>Start Game!</v-btn>
+							
+						</v-form>
           </v-card-text>
-
-          <v-divider></v-divider>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false">
-              I accept
-            </v-btn>
-          </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-card-actions>
+
         
       </v-card-actions>
       <v-card-text>
@@ -46,11 +77,24 @@ export default {
   data() {
     return {
       codeFile: {},
-      rooms: [],
+      rooms: [
+				""
+			],
+			codes:[
+				"bottom_braker",
+				"saikyo",
+				"natto",
+				"nurupo"
+			],
+			code1:"",
+			code2:"",
+			code3:"",
+			code4:"",
     };
   },
   created: function () {
     this.getRooms();
+		this.getCodes();
   },
   methods: {
     selectedFile: function (e) {
@@ -60,7 +104,8 @@ export default {
       this.codeFile = files[0];
     },
 		postRoom() {
-      const uri = "http://35.75.64.1:8080/rooms";
+			let entriedCodes = [this.code1,this.code2,this.code3,this.code4]
+      const uri = "http://35.75.64.1:8000/rooms";
       let config = {
         headers: {
             "Content-Type": "application/json", 
@@ -69,7 +114,7 @@ export default {
       }
       let data = {
 				contest_id: this.$route.params.id,
-				codes: []
+				codes: entriedCodes
       }
       axios.post(uri,data, config
         ).then(response => {
@@ -82,7 +127,7 @@ export default {
     },
     getRooms() {
       const uri =
-        "http://35.75.64.1:8080/contests/" + this.$route.params.id + "/rooms";
+        "http://35.75.64.1:8000/contests/" + this.$route.params.id + "/rooms";
       axios
         .get(uri, {
           headers: {
@@ -96,6 +141,21 @@ export default {
           console.log(response.data);
           this.rooms = response.data;
         });
+    },
+		getCodes() {
+      const uri = "http://35.75.64.1:8000/contests/"+this.$route.params.id+"/codes";
+      axios.get(uri, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "Authorization": this.$store.state.userToken 
+        },
+        data: {
+        } 
+      }).then(response => {
+        console.log("success")
+        console.log(response.data)
+        this.codes = response.data;
+      });
     },
   },
 };
