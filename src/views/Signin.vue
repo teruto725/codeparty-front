@@ -1,5 +1,5 @@
 <template>
-<div>
+<v-container>
   <v-row>
       <v-alert
       dense
@@ -30,7 +30,8 @@
         <v-btn outlined type="submit" color = "primary">Sign In</v-btn>
     </v-form>
     </v-row>
-    </div>
+    
+</v-container>
 </template>
 <script>
 import axios from 'axios'

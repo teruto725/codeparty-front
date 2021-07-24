@@ -2,12 +2,14 @@
 <v-app :style="{background: $vuetify.theme.themes[theme].background}">
   <head-bar/><!-- headbar --> 
   <v-main>
+    <v-container>
     <v-row style="height: 50px">
 
     </v-row>
-    <v-row justify="center">
+    <v-row >
       <router-view />
     </v-row>
+    </v-container>
   </v-main>
 
   <v-footer color = "primary" clipped-left >

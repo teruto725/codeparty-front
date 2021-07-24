@@ -1,68 +1,78 @@
 <template>
-<v-container>
-  <v-row justify="center">
-    <h1>Contests</h1>
-  </v-row>
-  <v-row justify="center">
-    <v-col cols="6" justify="center">
-      <v-card 
-          v-for="contest in contests" :key="contest.id"
-          color="thirdary"
-          >
-          <v-row>
-            <v-col cols = "1"></v-col>
-              <v-col justify="center" class = "white--text">
-                <v-card-title>{{contest.name}}</v-card-title>  
-              </v-col>
-            <v-card-actions>
-                  <v-btn 
-                    :to= '"/contests/" + contest.id'
-                    class="2"
-                    fab
-                    color="white"
-                    icon
-                  > 
-                    <v-icon small>mdi-pencil</v-icon> 
-                  </v-btn> 
-            </v-card-actions>
-            <v-col cols = "1"></v-col>
-          </v-row>
-      </v-card>
-    </v-col>
-  </v-row>
-</v-container>
+  <v-container>
+    <v-row justify="center">
+      <h1>Choose Content</h1>
+    </v-row>
+    <v-row style="padding: 10px">
+      <v-divider />
+    </v-row>
+    <v-row justify="center">
+      <v-col 
+				justify="center" 
+				v-for="contest in contests"
+				:key="contest.id"
+				class ="col-4"
+				>
+        <v-card
+					elevation="0"
+          color="background"
+					style="padding: 10px;"
+          :to="'/contests/' + contest.id"
+        >
+          <v-img
+      :src="require(`@/assets/contests/${contest.path}`)"
+    ></v-img>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
       data: "",
       new_worbook: {},
-      contests :[]
+      contests: [
+				{
+					id:1,
+					name:"square drop",
+					path:"square_drop.png",
+				},
+				{
+					id:2,
+					name:"hex",
+					path:"hex.png"
+				},
+				{
+					id:3,
+					name:"uso",
+					path:"uso.png"
+				},
+			],
     };
   },
-  created: function() {
+  created: function () {
     this.getContests();
   },
   methods: {
     getContests() {
       const uri = "http://35.75.64.1:8000/contests";
-      axios.get(uri, {
-        headers: { 
-          "Content-Type": "application/json", 
-          "Authorization": this.$store.state.userToken 
-        },
-        data: {} 
-      }).then(response => {
-        console.log("success")
-        console.log(response.data[0].name)
-        this.contests = response.data;
-      });
-
+      axios
+        .get(uri, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {},
+        })
+        .then((response) => {
+          console.log("success");
+          console.log(response.data[0].name);
+          //this.contests = response.data;
+        });
     },
-    
-  }
+  },
 };
 </script>
 <style scoped>

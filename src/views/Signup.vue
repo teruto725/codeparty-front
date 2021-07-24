@@ -1,4 +1,6 @@
 <template>
+<v-container>
+    <v-row justify="center">
     <v-form v-on:submit.prevent="doLogin" v-model="valid">
         <v-text-field  
           type="text" 
@@ -16,6 +18,8 @@
         />
         <v-btn outlined type="submit" color = "primary">Sign Up</v-btn>
     </v-form>
+    </v-row>
+</v-container>
 </template>
 <script>
 import axios from 'axios'

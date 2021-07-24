@@ -5,13 +5,15 @@ import Store from '@/store/index.js'
 import Signin from "./views/Signin.vue"
 import Signup from "./views/Signup.vue"
 import Top from "./views/Top.vue"
+import Howto from "./views/Howto.vue"
 import Contests from "./views/Contests.vue"
 import Contest from "./views/Contest.vue"
 import ContestHome from "./views/ContestHome.vue"
+import ContestTutorial from "./views/ContestTutorial.vue"
 import ContestEntry from "./views/ContestEntry.vue"
 import ContestRooms from "./views/ContestRooms.vue"
 import ContestCodes from "./views/ContestCodes.vue"
-
+import ContestBattles from "./views/ContestBattles.vue"
 Vue.use(Router)
 const routes = [
   {
@@ -27,8 +29,12 @@ const routes = [
   {
       name:"top",
       path:"/",
-      component: Top,
-      meta: { requiresAuth: true }
+      component: Top
+  },
+  {
+    name:"howto",
+    path:"/howto",
+    component: Howto
   },
   {
       name:"contests",
@@ -41,8 +47,13 @@ const routes = [
       component: Contest,
       children: [
         {
-          name: "contestHome",
+          name: "description",
           path: "",
+          component: ContestHome,
+        },
+        {
+          name: "contestDescription",
+          path: "description",
           component: ContestHome,
         },
         {
@@ -50,6 +61,11 @@ const routes = [
             path: "codes",
             component: ContestCodes,
         },
+        {
+          name: "contestTutorial",
+          path: "tutorial",
+          component: ContestTutorial,
+      },
         {
           name: "contestEntry",
           path: "entry",
@@ -60,6 +76,11 @@ const routes = [
           name: "contestRooms",
           path: "rooms",
           component: ContestRooms,
+        },
+        {
+          name: "contestBattles",
+          path: "battles",
+          component: ContestBattles,
         }
       ]
   }

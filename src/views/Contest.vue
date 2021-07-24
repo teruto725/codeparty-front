@@ -3,55 +3,52 @@
     <v-row justify="center">
       <h1>{{ contest.name }}</h1>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="12">
-        <v-card height="300">
-          <v-card-text>
-            {{ contest.description }}
-          </v-card-text>
-        </v-card>
-      </v-col>
+    <v-row style="padding:10px">
+      <v-divider/>
     </v-row>
-    <v-row justify="center">
-      <v-col cols="3">
-        <v-card
-          height="300"
-          width="300"
-          :to="'/contests/' + $route.params.id + '/codes'"
+    <v-row>
+      <v-col align="center">
+      <v-tabs
+      align-with-title
+       grow centered color="primary"
+      background-color="background"
+      >
+        
+        <v-tab
+          :to="'/contests/' + $route.params.id + '/description'"
         >
-          <v-card-title> コード </v-card-title>
-          <v-card-text>
-            他のユーザが提出したコードを確認できます。
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col cols="3">
-        <v-card
-          height="300"
-          width="300"
+        Description
+        </v-tab>
+        <v-tab
+          :to="'/contests/' + $route.params.id + '/tutorial'"
+        >
+        Tutorial
+        </v-tab>
+        <v-tab
           :to="'/contests/' + $route.params.id + '/entry'"
         >
-          <v-card-title> 提出 </v-card-title>
-          <v-card-text>
-            コードを提出できます。<br />これまでにあなたが提出したコード一覧も確認できます。
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col cols="3">
-        <v-card
-          height="300"
-          width="300"
+        Submit
+        </v-tab>
+        <v-tab
+          :to="'/contests/' + $route.params.id + '/battles'"
+        >
+        Battles
+        </v-tab>
+        <v-tab
           :to="'/contests/' + $route.params.id + '/rooms'"
         >
-          <v-card-title> バトル </v-card-title>
-          <v-card-text>
-            これまでに行われたバトルを確認できます。<br />他の人とバトルをすることもできます。
-          </v-card-text>
-        </v-card>
+        Results
+        </v-tab>
+      </v-tabs>
       </v-col>
     </v-row>
-
-    <router-view />
+    <v-row style="padding:10px">
+      <v-divider/>
+    </v-row>
+    <v-row justify="center">
+      <router-view />
+    </v-row>
+    
   </v-container>
 </template>
 <script>
