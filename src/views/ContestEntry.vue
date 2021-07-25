@@ -16,7 +16,7 @@
         <v-file-input
           type="file"
           v-on:change="fileSelected"
-          label="File"
+          label="Source File"
           v-model="newCode.file"
         ></v-file-input>
         <v-btn outlined style="padding:auto;" type="submit" color="primary">Submit Code</v-btn>
@@ -35,53 +35,47 @@ export default {
       nameRules: [
         v => !!v || 'Code name is required',
       ],
+      fileRules: [
+        v => !!v || 'Source File is required',
+      ],
     };
   },
   created: function () {
-    this.getUserCodes();
   },
   methods: {
     fileSelected(event) {
       console.log(event);
-      this.fileInfo = event.File;
+      event.preventDefault();
+      this.fileInfo = event.File[0];
+      console.log(this.fileInfo);
     },
     postCode() {
-      console.log(this.$store.state.userToken);
-      const uri = "http://35.75.64.1:8000/codes";
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.state.userToken,
-        },
-      };
-      let data = {
-        contest_id: this.$route.params.id,
-        file: this.fileInfo,
-      };
-      axios.post(uri, data, config).then((response) => {
-        console.log("success");
-        console.log(response.data);
-      });
-    },
-    getUserCodes() {
-      console.log(this.$store.state.userToken);
-      const uri =
-        "http://35.75.64.1:8000/contests/" +
-        this.$route.params.id +
-        "/submitted";
-      axios
-        .get(uri, {
+      let formData = new FormData()
+
+      console.log(this.fileInfo);
+      if(this.fileInfo){
+        formData.append("file",this.fileInfo) 
+        formData.append("name",this.newCode.name)
+        formData.append("contest_id",this.$route.params.id)
+        console.log(formData)
+        const uri = "http://35.75.64.1:8000/codes";
+        let config = {
           headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + this.$store.state.userToken,
+            "Authorization": "Bearer " + this.$store.state.userToken,
           },
-          data: {},
-        })
-        .then((response) => {
+        };
+        
+        axios.post(uri, formData, config).then((response) => {
           console.log("success");
           console.log(response.data);
-          this.codes = response.data;
         });
+      }
+      else{
+        console.log("else")
+      }
+    },
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
     },
   },
 };
