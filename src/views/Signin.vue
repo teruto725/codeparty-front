@@ -20,6 +20,7 @@
           :rules="nameRules"
           v-model="user.name" 
         />
+
         <v-text-field  
           type="password" 
           required 

@@ -7,13 +7,12 @@ import Signup from "./views/Signup.vue"
 import Top from "./views/Top.vue"
 import Howto from "./views/Howto.vue"
 import Contests from "./views/Contests.vue"
-import Contest from "./views/Contest.vue"
-import ContestHome from "./views/ContestHome.vue"
-import ContestTutorial from "./views/ContestTutorial.vue"
-import ContestEntry from "./views/ContestEntry.vue"
-import ContestRooms from "./views/ContestRooms.vue"
-import ContestCodes from "./views/ContestCodes.vue"
-import ContestBattles from "./views/ContestBattles.vue"
+import Contest from "./views/contest/Contest.vue"
+import ConDescription from "./views/contest/Description.vue"
+import ConTutorial from "./views/contest/Tutorial.vue"
+import ConSubmit from "./views/contest/Submit.vue"
+import ConResults from "./views/contest/Results.vue"
+import ConBattles from "./views/contest/Battles.vue"
 Vue.use(Router)
 const routes = [
   {
@@ -47,40 +46,36 @@ const routes = [
       component: Contest,
       children: [
         {
-          name: "description",
+          name: "conHome",
           path: "",
-          component: ContestHome,
+          component: ConDescription,
         },
         {
-          name: "contestDescription",
+          name: "conDescription",
           path: "description",
-          component: ContestHome,
+          component: ConDescription,
         },
+        
         {
-            name: "contestCodes",
-            path: "codes",
-            component: ContestCodes,
-        },
-        {
-          name: "contestTutorial",
+          name: "conTutorial",
           path: "tutorial",
-          component: ContestTutorial,
+          component: ConTutorial,
       },
         {
-          name: "contestEntry",
-          path: "entry",
-          component: ContestEntry,
+          name: "conSubmit",
+          path: "submit",
+          component: ConSubmit,
           meta: {requiresAuth: true}
         },
         {
-          name: "contestRooms",
-          path: "rooms",
-          component: ContestRooms,
+          name: "conResults",
+          path: "results",
+          component: ConResults,
         },
         {
-          name: "contestBattles",
+          name: "conBattles",
           path: "battles",
-          component: ContestBattles,
+          component: ConBattles,
         }
       ]
   }

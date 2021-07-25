@@ -45,8 +45,7 @@ export default {
   methods: {
     fileSelected(event) {
       console.log(event);
-      event.preventDefault();
-      this.fileInfo = event.File[0];
+      this.fileInfo = event;
       console.log(this.fileInfo);
     },
     postCode() {
@@ -65,8 +64,13 @@ export default {
           },
         };
         
-        axios.post(uri, formData, config).then((response) => {
+        axios.post(uri, formData, config)
+        .then((response) => {
           console.log("success");
+          console.log(response.data);
+        })
+        .catch((response) => {
+          console.log("falut")
           console.log(response.data);
         });
       }

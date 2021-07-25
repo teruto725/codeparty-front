@@ -25,7 +25,7 @@
         Tutorial
         </v-tab>
         <v-tab
-          :to="'/contests/' + $route.params.id + '/entry'"
+          :to="'/contests/' + $route.params.id + '/submit'"
         >
         Submit
         </v-tab>
@@ -35,7 +35,7 @@
         Battles
         </v-tab>
         <v-tab
-          :to="'/contests/' + $route.params.id + '/rooms'"
+          :to="'/contests/' + $route.params.id + '/results'"
         >
         Results
         </v-tab>

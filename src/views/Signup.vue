@@ -10,6 +10,13 @@
           v-model="user.name" 
         />
         <v-text-field  
+          type="text" 
+          required 
+          placeholder="Email" 
+          :rules="emailRules"
+          v-model="user.email" 
+        />
+        <v-text-field  
           type="password" 
           required 
           placeholder="Password" 
@@ -36,6 +43,10 @@ export default {
       pathwordRules: [
         v => !!v || 'Password is required',
       ],
+      emailRules: [
+        v => !!v || 'Email is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ]
     };
   },
   methods: {
@@ -46,7 +57,8 @@ export default {
         uri, 
         {
             name: this.user.name,
-            password: this.user.password
+            password: this.user.password,
+            email: this.user.email,
         }
       ).then(response => {
         console.log("success")
