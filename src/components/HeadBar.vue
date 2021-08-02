@@ -15,7 +15,7 @@
           <v-tab v-if="$is_logined == false" :to="{ name: 'signup' }"
             >Sign Up</v-tab
           >
-					<v-tab v-if="$is_logined" > UserPage</v-tab>
+          <v-tab v-if="$is_logined" :to="{ name: 'userpage' }"> UserPage</v-tab>
           <v-tab v-if="$is_logined" v-on:click="logout()"> LogOut</v-tab>
         </v-tabs>
       </template>

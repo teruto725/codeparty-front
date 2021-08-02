@@ -6,6 +6,7 @@ import Signin from "./views/Signin.vue"
 import Signup from "./views/Signup.vue"
 import Top from "./views/Top.vue"
 import Howto from "./views/Howto.vue"
+import UserPage from "./views/UserPage.vue"
 import Contests from "./views/Contests.vue"
 import Contest from "./views/contest/Contest.vue"
 import ConDescription from "./views/contest/Description.vue"
@@ -39,6 +40,11 @@ const routes = [
       name:"contests",
       path:"/contests",
       component: Contests,
+  },
+  {
+    name:"userpage",
+    path:"/userpage",
+    component: UserPage,
   },
   {
       name:"contest",
@@ -76,7 +82,7 @@ const routes = [
           name: "conBattles",
           path: "battles",
           component: ConBattles,
-        }
+        },
       ]
   }
 ]

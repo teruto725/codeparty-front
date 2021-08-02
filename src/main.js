@@ -4,7 +4,8 @@ import vuetify from './plugins/vuetify'
 import router from "./router";
 import store from "./store";
 import axios from 'axios';
-
+import vuehead from "vue-head"
+import unity from 'vue-unity-webgl'
 Vue.config.productionTip = false
 
 // 1. グローバル変数を定義する
@@ -40,5 +41,7 @@ new Vue({
   router,
   store,
   axios,
+  vuehead,
+  unity,
   render: h => h(App)
 }).$mount('#app')

@@ -1,4 +1,17 @@
 <template>
+<v-container >
+  <v-row justify="center">
+          <v-alert
+      dense
+      outlined
+      type="success"
+      text
+      v-model="success"
+    >
+      <strong>{{responseName}}</strong> was submitted.
+    </v-alert>
+  </v-row>
+  <v-row justify="center">
   <v-card 
     class="col-3"
     elevation="0"
@@ -23,6 +36,8 @@
       </v-form>
     </v-row>
   </v-card>
+  </v-row>
+</v-container>
 </template>
 <script>
 import axios from "axios";
@@ -38,19 +53,18 @@ export default {
       fileRules: [
         v => !!v || 'Source File is required',
       ],
+      success: false,
+      responseName: ""
     };
   },
   created: function () {
   },
   methods: {
     fileSelected(event) {
-      console.log(event);
       this.fileInfo = event;
-      console.log(this.fileInfo);
     },
     postCode() {
       let formData = new FormData()
-
       console.log(this.fileInfo);
       if(this.fileInfo){
         formData.append("file",this.fileInfo) 
@@ -68,6 +82,9 @@ export default {
         .then((response) => {
           console.log("success");
           console.log(response.data);
+          this.success = true
+          this.responseName = response.data.name
+          this.newCode = {}
         })
         .catch((response) => {
           console.log("falut")
