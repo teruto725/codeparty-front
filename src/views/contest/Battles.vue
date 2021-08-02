@@ -5,6 +5,8 @@
     <v-combobox
       v-model="code1"
       :items="codes"
+      item-text="name"
+      item-value="id" 
       label="Choose Code"
       dense
     >
@@ -12,6 +14,8 @@
     <v-combobox
       v-model="code2"
       :items="codes"
+      item-text="name"
+      item-value="id"
       label="Choose Code"
       dense
     >
@@ -19,6 +23,8 @@
     <v-combobox
       v-model="code3"
       :items="codes"
+      item-text="name"
+      item-value="id"
       label="Choose Code"
       dense
     >
@@ -26,6 +32,8 @@
     <v-combobox
       v-model="code4"
       :items="codes"
+      item-text="name"
+      item-value="id"
       label="Choose Code"
       dense
     >
@@ -43,13 +51,25 @@ export default {
     return {
       codeFile: {},
       rooms: [
-				""
+			
 			],
 			codes:[
-				"bottom_braker",
-				"saikyo",
-				"natto",
-				"nurupo"
+				{
+          "id":1,
+          "name":"aaa"
+        },
+        {
+          "id":2,
+          "name":"bbb"
+        },
+        {
+          "id":3,
+          "name":"ccdc"
+        },
+        {
+          "id":4,
+          "name":"ddd"
+        }
 			],
 			code1:"",
 			code2:"",
@@ -59,7 +79,6 @@ export default {
     };
   },
   created: function () {
-    this.getRooms();
 		this.getCodes();
   },
   methods: {
@@ -70,8 +89,8 @@ export default {
       this.codeFile = files[0];
     },
 		postRoom() {
-			let entriedCodes = [this.code1,this.code2,this.code3,this.code4]
-      const uri = "http://35.75.64.1:8000/rooms";
+			let entriedCodes = [this.code1.id,this.code2.id,this.code3.id,this.code4.id]
+      const uri = "http://35.75.64.1:8000/rooms/submit";
       let config = {
         headers: {
             "Content-Type": "application/json", 
@@ -79,8 +98,8 @@ export default {
         }
       }
       let data = {
-				contest_id: this.$route.params.id,
-				codes: entriedCodes
+				contest_id: parseInt(this.$route.params.id),
+				code_ids: entriedCodes
       }
       axios.post(uri,data, config
         ).then(response => {
@@ -90,23 +109,6 @@ export default {
       .catch(error => {
         console.log(error)
       });
-    },
-    getRooms() {
-      const uri =
-        "http://35.75.64.1:8000/contests/" + this.$route.params.id + "/rooms";
-      axios
-        .get(uri, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Bearer "+this.$store.state.userToken,
-          },
-          data: {},
-        })
-        .then((response) => {
-          console.log("success");
-          console.log(response.data);
-          this.rooms = response.data;
-        });
     },
 		getCodes() {
       const uri = "http://35.75.64.1:8000/contests/"+this.$route.params.id+"/codes";
@@ -118,9 +120,7 @@ export default {
         data: {
         } 
       }).then(response => {
-        console.log("success")
-        console.log(response.data)
-        //this.codes = response.data;
+        this.codes = response.data;
       });
     },
   },

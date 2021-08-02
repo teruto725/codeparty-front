@@ -18,9 +18,11 @@
           color="background"
 					style="padding: 10px;"
           :to="'/contests/' + contest.id"
+          height="300px"
+          width = "200px"
         >
           <v-img
-      :src="require(`@/assets/contests/${contest.path}`)"
+      :src="contest.thumb"
     ></v-img>
         </v-card>
       </v-col>
@@ -38,17 +40,17 @@ export default {
 				{
 					id:1,
 					name:"square drop",
-					path:"square_drop.png",
+					thumb:"square_drop.png",
 				},
 				{
 					id:2,
 					name:"hex",
-					path:"hex.png"
+					thumb:"hex.png"
 				},
 				{
 					id:3,
 					name:"uso",
-					path:"uso.png"
+					thumb:"uso.png"
 				},
 			],
     };
@@ -69,7 +71,7 @@ export default {
         .then((response) => {
           console.log("success");
           console.log(response.data[0].name);
-          //this.contests = response.data;
+          this.contests = response.data;
         });
     },
   },
